@@ -26,3 +26,15 @@ export const Row = styled.article`
     margin: 0;
   }
 `
+export const Button = styled.button`
+  background: transparent;
+  border: 1px solid white;
+  border-radius: 2px;
+  color: white;
+  cursor: pointer;
+  padding: .5rem 0;
+
+  :hover {
+    background: rgba(255,255,255,.15);
+  }
+`

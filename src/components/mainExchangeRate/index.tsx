@@ -1,14 +1,17 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { CurrencyContext } from '../../context/currencyContext'
 import CurrencyAPI from '../../services/currencyApi'
-import { Container, Row } from './styles'
+import { Button, Container, Row } from './styles'
 import NumberFormat from 'react-number-format';
+import SharedFunctions from '../../utils/shared';
 
 interface Props {
   currencyCode?: CurrencyValue
+  cleanCurrency: Function
+  userAmount: number
 }
 
-const MainExchangeRate = ({currencyCode}: Props) => {
+const MainExchangeRate = ({currencyCode, cleanCurrency, userAmount}: Props) => {
   const [chosenCurrency, setCurrency] = useState<MainExchangeRateType>()
   const {getByCode} = useContext(CurrencyContext) as CurrencyContextType
 
@@ -41,6 +44,11 @@ const MainExchangeRate = ({currencyCode}: Props) => {
     }
   }
 
+  function removeChosenCurrency(){
+    setCurrency(undefined)
+    cleanCurrency()
+  }
+
   return (
     <Container>
       {
@@ -56,20 +64,23 @@ const MainExchangeRate = ({currencyCode}: Props) => {
                 <h3>
                   <NumberFormat
                     displayType={'text'}
-                    value={chosenCurrency.bid}
+                    value={SharedFunctions.getCurrencyMask(userAmount * chosenCurrency.bid)}
                     prefix='R$ '
                     decimalScale={4}
+                    thousandSeparator='.'
+                    decimalSeparator=','
                     fixedDecimalScale={true}
                   />
                 </h3>
                 <small>{chosenCurrency.name}</small>
               </main>
             </Row>
+            <Button onClick={removeChosenCurrency}>Voltar</Button>
           </>
         ) : 
         (
           <>
-            { 
+            {
               defaultCurrencies.map(currency => (
                 <Row key={currency.code}>
                   <aside>
@@ -78,11 +89,13 @@ const MainExchangeRate = ({currencyCode}: Props) => {
                   <main>
                     <h2>{getByCode(currency.code) ? getByCode(currency.code).value : 'Loading'}</h2>
                     <h3>
-                      <NumberFormat
+                    <NumberFormat
                         displayType={'text'}
-                        value={currency.bid}
+                        value={SharedFunctions.getCurrencyMask(userAmount * currency.bid)}
                         prefix='R$ '
                         decimalScale={4}
+                        thousandSeparator='.'
+                        decimalSeparator=','
                         fixedDecimalScale={true}
                       />
                     </h3>

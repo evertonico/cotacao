@@ -3,6 +3,7 @@ import { CurrencyContext } from '../../context/currencyContext'
 import CurrencyAPI from '../../services/currencyApi'
 import { ContainerList } from './styles'
 import NumberFormat from 'react-number-format';
+import SharedFunctions from '../../utils/shared';
 interface Props {
   getCurrencyCode?: Function
 }
@@ -32,13 +33,15 @@ const CurrencyList = ({getCurrencyCode}: Props) => {
             <small>({exchangeRate.key})</small>
             <h6>
               <NumberFormat
-                  displayType={'text'}
-                  value={exchangeRate.value}
-                  prefix='R$ '
-                  decimalScale={4}
-                  fixedDecimalScale={true}
-                />
-              </h6>
+                displayType={'text'}
+                value={SharedFunctions.getCurrencyMask(exchangeRate.value)}
+                prefix='R$ '
+                decimalScale={4}
+                thousandSeparator='.'
+                decimalSeparator=','
+                fixedDecimalScale={true}
+              />
+            </h6>
           </li>
         ))
       }
