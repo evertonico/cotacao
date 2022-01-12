@@ -76,7 +76,7 @@ const MainExchangeRate = ({currencyCode}: Props) => {
 
                   </aside>
                   <main>
-                    <h2>{JSON.stringify(currency.bid)}{getByCode(currency.code) ? getByCode(currency.code).value : 'Loading'}</h2>
+                    <h2>{getByCode(currency.code) ? getByCode(currency.code).value : 'Loading'}</h2>
                     <h3>
                       <NumberFormat
                         displayType={'text'}
