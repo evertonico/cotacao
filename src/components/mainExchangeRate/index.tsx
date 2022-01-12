@@ -7,11 +7,11 @@ interface Props {
   currencyCode?: string
 }
 
-const MainQuotation = ({currencyCode}: Props) => {
-  const [chosenCurrency, setCurrency] = useState<MainQuotationType>()
+const MainExchangeRate = ({currencyCode}: Props) => {
+  const [chosenCurrency, setCurrency] = useState<MainExchangeRateType>()
   const {getByCode} = useContext(CurrencyContext) as CurrencyContextType
 
-  const [defaultCurrencies, setDefaultCurrencies] = useState<MainQuotationType[]>([])
+  const [defaultCurrencies, setDefaultCurrencies] = useState<MainExchangeRateType[]>([])
 
   useEffect(() => {
     getDefaultCurrencies()
@@ -27,7 +27,7 @@ const MainQuotation = ({currencyCode}: Props) => {
   }
 
   async function getCurrencyInfo(code: string){
-    const currency = await CurrencyAPI.getQuotationByCode(code)
+    const currency = await CurrencyAPI.getExchangeRateByCode(code)
     if(currency) setCurrency(currency)
   }
 
@@ -61,4 +61,4 @@ const MainQuotation = ({currencyCode}: Props) => {
   )
 }
 
-export default MainQuotation
+export default MainExchangeRate

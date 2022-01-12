@@ -1,11 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { CurrencyContext } from '../context/currencyContext';
-import CurrencyAPI, { CurrencyName } from '../services/currencyApi';
-import MainQuotation from './mainCotation';
+import CurrencyAPI from '../services/currencyApi';
+import CurrencyList from './currencyList';
+import MainExchangeRate from './mainExchangeRate';
 import { Container, Header } from './styles';
 
 function App() {
-  const { currencies, setNames, getByCode } = useContext(CurrencyContext) as CurrencyContextType
+  const { setNames, getByCode } = useContext(CurrencyContext) as CurrencyContextType
 
   useEffect(() => {
     getNames()
@@ -19,9 +20,12 @@ function App() {
   return (
     <Container>
      <Header>
-       <p>{JSON.stringify(getByCode('BRL'))}</p>
-       <MainQuotation />
+       {/* <p>{JSON.stringify(getByCode('BRL'))}</p> */}
+       <p></p>
+       <MainExchangeRate />
      </Header>
+
+     <CurrencyList />
     </Container>
   );
 }

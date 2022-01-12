@@ -1,4 +1,4 @@
-type MainQuotationType = {
+type MainExchangeRateType = {
   code: string
   name: string
   high: number
