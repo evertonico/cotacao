@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { CurrencyContext } from '../context/currencyContext';
 import CurrencyAPI from '../services/currencyApi';
 import CurrencyList from './currencyList';
@@ -7,6 +7,8 @@ import { Container, Header } from './styles';
 
 function App() {
   const { setNames, getByCode } = useContext(CurrencyContext) as CurrencyContextType
+
+  const [chosenCurrency, setChosenCurrency] = useState<CurrencyValue>()
 
   useEffect(() => {
     getNames()
@@ -17,15 +19,19 @@ function App() {
     setNames(result)
   }
 
+  function handleChosenCurrency(exchangeRate: CurrencyValue){
+    setChosenCurrency(exchangeRate)
+  }
+
   return (
     <Container>
      <Header>
        {/* <p>{JSON.stringify(getByCode('BRL'))}</p> */}
        <p></p>
-       <MainExchangeRate />
+       <MainExchangeRate currencyCode={chosenCurrency}/>
      </Header>
 
-     <CurrencyList />
+     <CurrencyList getCurrencyCode={handleChosenCurrency}/>
     </Container>
   );
 }

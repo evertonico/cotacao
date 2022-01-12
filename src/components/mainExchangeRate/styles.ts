@@ -10,7 +10,7 @@ export const Row = styled.article`
   border: 1px solid white;
   border-radius: 2px;
   color: white;
-  padding: 1rem 1rem .5rem;
+  padding: .5rem 0 .5rem;
   line-height: 1.8rem;
   font-family: sans-serif;
   cursor: pointer;

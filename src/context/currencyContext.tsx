@@ -25,7 +25,6 @@ export default function CurrencyProvider({children}:Prop) {
   function setExchangeRates(coins: CurrencyValue[]){
     if(currencyNameList.length > 0){
       const exchangeRates = coins.map(currency => {
-        console.log(currency)
         return {...currency, name: getByCode(currency.key).value || ''}
       })
       const filteredList = exchangeRates.filter(item => item.name).sort((a,b) => b.value - a.value)

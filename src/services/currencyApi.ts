@@ -5,7 +5,7 @@ function getCurrencyName(){
     .then(response => {
       return Object.entries(response.data).map(([cod, name]) => { return {key: cod, value: name}})
     })
-    .catch(error => error)
+    .catch(error => error.toJSON())
 }
 
 function getUsdAndEur(){
@@ -13,7 +13,7 @@ function getUsdAndEur(){
     .then(response => {
       return Object.values(response.data)
     })
-    .catch(error => error)
+    .catch(error => error.toJSON())
 }
 
 function getExchangeRateByCode(code: string){
@@ -21,15 +21,15 @@ function getExchangeRateByCode(code: string){
     .then(response => {
       return Object.values(response.data)
     })
-    .catch(error => error)
+    .catch(error => error.toJSON())
 }
 
 function getAllExchangeRates(){
   return axios.get('https://freecurrencyapi.net/api/v2/latest?apikey=3d6e2e80-7287-11ec-b37c-3dd23c22bc50&base_currency=BRL')
     .then(response => {
-      return Object.entries(response.data.data).map(([cod, value]) => { return {key: cod, value: (1/Number(value)).toFixed(4)}})
+      return Object.entries(response.data.data).map(([cod, value]) => { return {key: cod, value: (1/Number(value)).toFixed(5)}})
     })
-    .catch(error => error)
+    .catch(error => error.toJSON())
 }
 
 const CurrencyAPI = {
